@@ -55,9 +55,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32l5xx_it.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/tx_initialize_low_level.s</name>
+			<name>Application/User/tx_initialize_low_level.S</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/tx_initialize_low_level.s</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/tx_initialize_low_level.S</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/stm32l562e_discovery.c</name>
@@ -540,6 +540,16 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/common/src/tx_thread_stack_analyze.c</locationURI>
 		</link>
 		<link>
+			<name>Middlewares/ThreadX/RTOS/Core/tx_thread_stack_error_handler.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/common/src/tx_thread_stack_error_handler.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/ThreadX/RTOS/Core/tx_thread_stack_error_notify.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/common/src/tx_thread_stack_error_notify.c</locationURI>
+		</link>
+		<link>
 			<name>Middlewares/ThreadX/RTOS/Core/tx_thread_suspend.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/common/src/tx_thread_suspend.c</locationURI>
@@ -973,16 +983,6 @@
 			<name>Middlewares/ThreadX/RTOS/Module_Manager/tx_thread_stack_build.s</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/ports_module/cortex_m33/gnu/module_manager/src/tx_thread_stack_build.s</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/ThreadX/RTOS/Module_Manager/tx_thread_stack_error_handler.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/ports_module/cortex_m33/gnu/module_manager/src/tx_thread_stack_error_handler.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/ThreadX/RTOS/Module_Manager/tx_thread_stack_error_notify.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/ports_module/cortex_m33/gnu/module_manager/src/tx_thread_stack_error_notify.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ThreadX/RTOS/Module_Manager/tx_thread_system_return.s</name>

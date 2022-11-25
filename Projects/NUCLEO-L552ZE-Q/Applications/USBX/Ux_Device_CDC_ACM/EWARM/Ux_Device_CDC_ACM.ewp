@@ -66,7 +66,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>8.32.3.20186</state>
+          <state>8.50.1.24770</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -116,7 +116,7 @@
         </option>
         <option>
           <name>GBECoreSlave</name>
-          <version>27</version>
+          <version>28</version>
           <state></state>
         </option>
         <option>
@@ -133,8 +133,8 @@
         </option>
         <option>
           <name>CoreVariant</name>
-          <version>27</version>
-          <state>59</state>
+          <version>28</version>
+          <state>39</state>
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
@@ -156,8 +156,8 @@
         </option>
         <option>
           <name>GFPUCoreSlave2</name>
-          <version>27</version>
-          <state>59</state>
+          <version>28</version>
+          <state>39</state>
         </option>
         <option>
           <name>OGCMSISPackSelectDevice</name>
@@ -215,7 +215,7 @@
       <name>ICCARM</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>35</version>
+        <version>36</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -224,6 +224,10 @@
         </option>
         <option>
           <name>CCDefines</name>
+          <state>USE_FULL_LL_DRIVER</state>
+          <state>USBPD_PORT_COUNT=1</state>
+          <state>_SNK</state>
+          <state>USBPDCORE_LIB_NO_PD</state>
           <state>TX_SINGLE_MODE_NON_SECURE</state>
           <state>TX_INCLUDE_USER_DEFINE_FILE</state>
           <state>UX_INCLUDE_USER_DEFINE_FILE</state>
@@ -358,8 +362,12 @@
           <state>$PROJ_DIR$/../AZURE_RTOS/App</state>
           <state>$PROJ_DIR$/../USBX/App</state>
           <state>$PROJ_DIR$/../USBX/Target</state>
+          <state>$PROJ_DIR$/../USBPD/App</state>
+          <state>$PROJ_DIR$/../USBPD/Target</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy</state>
+          <state>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc</state>
+          <state>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/core/inc/</state>
@@ -484,6 +492,10 @@
         <option>
           <name>OICompilerExtraOption</name>
           <state>1</state>
+        </option>
+        <option>
+          <name>CCStackProtection</name>
+          <state>0</state>
         </option>
       </data>
     </settings>
@@ -617,7 +629,7 @@
         </option>
         <option>
           <name>AOutputFile</name>
-          <state>$FILE_BNAME$.o</state>
+          <state></state>
         </option>
         <option>
           <name>ALimitErrorsCheck</name>
@@ -705,7 +717,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>22</version>
+        <version>23</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -1025,6 +1037,22 @@
           <name>OILinkExtraOption</name>
           <state>1</state>
         </option>
+        <option>
+          <name>IlinkRawBinaryFile2</name>
+          <state></state>
+        </option>
+        <option>
+          <name>IlinkRawBinarySymbol2</name>
+          <state></state>
+        </option>
+        <option>
+          <name>IlinkRawBinarySegment2</name>
+          <state></state>
+        </option>
+        <option>
+          <name>IlinkRawBinaryAlign2</name>
+          <state></state>
+        </option>
       </data>
     </settings>
     <settings>
@@ -1075,7 +1103,7 @@
           <name>$PROJ_DIR$/../Core/Src/main.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../Core/Src/tx_initialize_low_level.s</name>
+          <name>$PROJ_DIR$/../Core/Src/tx_initialize_low_level.S</name>
         </file>
         <file>
           <name>$PROJ_DIR$/../Core/Src/app_threadx.c</name>
@@ -1089,6 +1117,33 @@
         <file>
           <name>$PROJ_DIR$/../Core/Src/stm32l5xx_hal_timebase_tim.c</name>
         </file>
+      </group>
+      <group>
+        <name>USBPD</name>
+        <group>
+          <name>Target</name>
+          <file>
+            <name>$PROJ_DIR$/../USBPD/Target/usbpd_dpm_user.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$/../USBPD/Target/usbpd_pwr_user.c</name>
+          </file>
+        </group>
+        <group>
+          <name>App</name>
+          <file>
+            <name>$PROJ_DIR$/../USBPD/App/usbpd.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$/../USBPD/App/usbpd_pwr_if.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$/../USBPD/App/usbpd_dpm_core.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$/../USBPD/App/usbpd_usb_if.c</name>
+          </file>
+        </group>
       </group>
       <group>
         <name>USBX</name>
@@ -1127,7 +1182,16 @@
     <group>
       <name>STM32L5xx_HAL_Driver</name>
       <file>
-        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_utils.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_exti.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_adc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_adc_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal.c</name>
@@ -1175,6 +1239,12 @@
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_lptim.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c</name>
       </file>
       <file>
@@ -1187,6 +1257,15 @@
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim_ex.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_ucpd.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_gpio.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_dma.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_pcd.c</name>
       </file>
       <file>
@@ -1194,6 +1273,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_usb.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_ll_tim.c</name>
       </file>
     </group>
     <group>
@@ -1205,6 +1287,30 @@
   </group>
   <group>
     <name>Middlewares</name>
+    <group>
+      <name>USBPD</name>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/lib/USBPDCORE_NOPD_CM33_wc32.a</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/src/usbpd_trace.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/src/usbpd_cad_hw_if.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/src/usbpd_hw.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/src/usbpd_hw_if_it.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/src/usbpd_phy_hw_if.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/src/usbpd_pwr_hw_if.c</name>
+      </file>
+    </group>
     <group>
       <name>USBX</name>
       <group>
@@ -1496,6 +1602,9 @@
         </file>
         <file>
           <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_uninitialize.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_transfer_abort.c</name>
         </file>
       </group>
       <group>
@@ -2035,10 +2144,10 @@
           <name>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/ports/cortex_m33/iar/src/tx_iar.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/ports/cortex_m33/iar/src/tx_thread_stack_error_handler.c</name>
+          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/common/src/tx_thread_stack_error_handler.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/ports/cortex_m33/iar/src/tx_thread_stack_error_notify.c</name>
+          <name>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/common/src/tx_thread_stack_error_notify.c</name>
         </file>
       </group>
     </group>

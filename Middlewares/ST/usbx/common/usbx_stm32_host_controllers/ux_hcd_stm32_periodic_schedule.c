@@ -36,7 +36,7 @@
 /*  FUNCTION                                               RELEASE        */
 /*                                                                        */
 /*    _ux_hcd_stm32_periodic_schedule                     PORTABLE C      */
-/*                                                           6.0          */
+/*                                                           6.1.10       */
 /*  AUTHOR                                                                */
 /*                                                                        */
 /*    Chaoqiong Xiao, Microsoft Corporation                               */
@@ -67,6 +67,9 @@
 /*    DATE              NAME                      DESCRIPTION             */
 /*                                                                        */
 /*  05-19-2020     Chaoqiong Xiao           Initial Version 6.0           */
+/*  01-31-2022     Chaoqiong Xiao           Modified comment(s),          */
+/*                                            added standalone support,   */
+/*                                            resulting in version 6.1.10 */
 /*                                                                        */
 /**************************************************************************/
 UINT  _ux_hcd_stm32_periodic_schedule(UX_HCD_STM32 *hcd_stm32)
@@ -74,6 +77,7 @@ UINT  _ux_hcd_stm32_periodic_schedule(UX_HCD_STM32 *hcd_stm32)
 
 UX_HCD_STM32_ED     *ed;
 ULONG               frame_number;
+ULONG               ep_bmAttributes;
 UX_TRANSFER         *transfer_request;
 
 
@@ -98,10 +102,14 @@ UX_TRANSFER         *transfer_request;
             if (transfer_request)
             {
 
+                /* Get Endpoint bmAttributes */
+                ep_bmAttributes = ed -> ux_stm32_ed_endpoint -> ux_endpoint_descriptor.bmAttributes;
+
                 /* Call HAL driver to submit the transfer request.  */
                 HAL_HCD_HC_SubmitRequest(hcd_stm32 -> hcd_handle, ed -> ux_stm32_ed_channel,
-                                         (transfer_request -> ux_transfer_request_type & UX_REQUEST_DIRECTION) == UX_REQUEST_IN ? 1 : 0,
-                                         EP_TYPE_INTR, USBH_PID_DATA,
+                                         ed -> ux_stm32_ed_dir,
+                                         (ep_bmAttributes & UX_MASK_ENDPOINT_TYPE) == UX_INTERRUPT_ENDPOINT ? EP_TYPE_INTR : EP_TYPE_ISOC,
+                                         USBH_PID_DATA,
                                          transfer_request -> ux_transfer_request_data_pointer,
                                          transfer_request -> ux_transfer_request_requested_length, 0);
             }

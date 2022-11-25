@@ -80,7 +80,7 @@
 				</option>
 				<option>
 					<name>OCProductVersion</name>
-					<state>8.32.3.20186</state>
+					<state>8.50.1.24770</state>
 				</option>
 				<option>
 					<name>OCDynDriverList</name>
@@ -88,7 +88,7 @@
 				</option>
 				<option>
 					<name>OCLastSavedByProductVersion</name>
-					<state>8.32.3.20186</state>
+					<state>8.50.1.24770</state>
 				</option>
 				<option>
 					<name>UseFlashLoader</name>
@@ -120,7 +120,7 @@
 				</option>
 				<option>
 					<name>OCImagesPath1</name>
-					<state>$PROJ_DIR$/Tx_SecureLEDToggle_TrustZone_NS/Exe/Tx_SecureLEDToggle_TrustZone_NS.out</state>
+					<state />
 				</option>
 				<option>
 					<name>OCImagesSuppressCheck2</name>
@@ -156,7 +156,7 @@
 				</option>
 				<option>
 					<name>OCImagesUse1</name>
-					<state>1</state>
+					<state>0</state>
 				</option>
 				<option>
 					<name>OCImagesUse2</name>
@@ -1118,8 +1118,8 @@
 				</option>
 				<option>
 					<name>CCSTLinkProbeList</name>
-					<version>0</version>
-					<state>2</state>
+					<version>1</version>
+					<state>0</state>
 				</option>
 			</data>
 		</settings>

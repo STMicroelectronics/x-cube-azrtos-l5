@@ -95,7 +95,7 @@
         <tRmem>1</tRmem>
         <tRfunc>1</tRfunc>
         <tRbox>1</tRbox>
-        <tRtrace>0</tRtrace>
+        <tRtrace>1</tRtrace>
         <sRSysVw>1</sRSysVw>
         <tRSysVw>1</tRSysVw>
         <sRunDeb>0</sRunDeb>
@@ -120,7 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>UL2V8M</Key>
-          <Name>UL2V8M(-S0 -C0 -P0 -FD20000000 -FC1000 -FN2 -FF0STM32L5x_512_0C00 -FS0C000000 -FL080000 -FF1STM32L5x_512_0800 -FS18000000 -FL180000 -FP0($$Device:STM32L552ZETxQ$CMSIS\Flash\STM32L5x_512_0C00.FLM) -FP1($$Device:STM32L552ZETxQ$CMSIS\Flash\STM32L5x_512_0800.FLM))</Name>
+          <Name>UL2V8M(-S0 -C0 -P0 -FD20000000 -FC8000 -FN2 -FF0STM32L5x_512_0C00 -FS0C000000 -FL080000 -FF1STM32L5x_512_0800 -FS18000000 -FL180000 -FP0($$Device:STM32L552ZETxQ$CMSIS\Flash\STM32L5x_512_0C00.FLM) -FP1($$Device:STM32L552ZETxQ$CMSIS\Flash\STM32L5x_512_0800.FLM))</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -226,8 +226,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/tx_initialize_low_level.s</PathWithFileName>
-      <FilenameWithoutPath>tx_initialize_low_level.s</FilenameWithoutPath>
+      <PathWithFileName>../Src/tx_initialize_low_level.S</PathWithFileName>
+      <FilenameWithoutPath>tx_initialize_low_level.S</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2546,7 +2546,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Middlewares/ST/threadx/ports/cortex_m33/ac6/src/tx_thread_stack_error_handler.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Middlewares/ST/threadx/common/src/tx_thread_stack_error_handler.c</PathWithFileName>
       <FilenameWithoutPath>tx_thread_stack_error_handler.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -2558,7 +2558,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Middlewares/ST/threadx/ports/cortex_m33/ac6/src/tx_thread_stack_error_notify.c</PathWithFileName>
+      <PathWithFileName>../../../../../../Middlewares/ST/threadx/common/src/tx_thread_stack_error_notify.c</PathWithFileName>
       <FilenameWithoutPath>tx_thread_stack_error_notify.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

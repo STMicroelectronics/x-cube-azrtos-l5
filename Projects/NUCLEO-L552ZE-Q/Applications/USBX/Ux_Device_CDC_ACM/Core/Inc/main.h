@@ -29,6 +29,18 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l5xx_hal.h"
 
+#include "stm32l5xx_ll_ucpd.h"
+#include "stm32l5xx_ll_bus.h"
+#include "stm32l5xx_ll_cortex.h"
+#include "stm32l5xx_ll_rcc.h"
+#include "stm32l5xx_ll_system.h"
+#include "stm32l5xx_ll_utils.h"
+#include "stm32l5xx_ll_pwr.h"
+#include "stm32l5xx_ll_gpio.h"
+#include "stm32l5xx_ll_dma.h"
+
+#include "stm32l5xx_ll_exti.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -36,7 +48,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-extern PCD_HandleTypeDef hpcd_USB_FS;
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -51,14 +63,21 @@ extern PCD_HandleTypeDef hpcd_USB_FS;
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
+void   MX_USB_PCD_Init(void);
+void   MX_LPUART1_UART_Init(void);
+void   MX_ICACHE_Init(void);
 
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-void   MX_USB_PCD_Init(void);
-void   MX_LPUART1_UART_Init(void);
+#define VDDA_APPLI 3300
+#define VSENSE_Pin GPIO_PIN_1
+#define VSENSE_GPIO_Port GPIOA
+#define TCPP01_DB_Pin GPIO_PIN_5
+#define TCPP01_DB_GPIO_Port GPIOB
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

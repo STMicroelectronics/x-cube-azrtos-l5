@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32l5xx_it.h"
+#include "usbpd.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -58,7 +59,7 @@
 extern DMA_HandleTypeDef hdma_lpuart1_tx;
 extern UART_HandleTypeDef hlpuart1;
 extern PCD_HandleTypeDef hpcd_USB_FS;
-extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim7;
 
 /* USER CODE BEGIN EV */
 
@@ -177,17 +178,45 @@ void DMA1_Channel1_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM6 global interrupt.
+  * @brief This function handles DMA1 channel2 global interrupt.
   */
-void TIM6_IRQHandler(void)
+void DMA1_Channel2_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM6_IRQn 0 */
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 0 */
 
-  /* USER CODE END TIM6_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim6);
-  /* USER CODE BEGIN TIM6_IRQn 1 */
+  /* USER CODE END DMA1_Channel2_IRQn 0 */
 
-  /* USER CODE END TIM6_IRQn 1 */
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 channel3 global interrupt.
+  */
+void DMA1_Channel3_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel3_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel3_IRQn 0 */
+
+  /* USER CODE BEGIN DMA1_Channel3_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel3_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM7 global interrupt.
+  */
+void TIM7_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM7_IRQn 0 */
+
+  /* USER CODE END TIM7_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim7);
+  /* USER CODE BEGIN TIM7_IRQn 1 */
+
+  /* USER CODE END TIM7_IRQn 1 */
 }
 
 /**
@@ -218,7 +247,21 @@ void USB_FS_IRQHandler(void)
   /* USER CODE END USB_FS_IRQn 1 */
 }
 
+/**
+  * @brief This function handles UCPD1 interrupt / UCPD1 wake-up interrupt through EXTI line 41.
+  */
+void UCPD1_IRQHandler(void)
+{
+  /* USER CODE BEGIN UCPD1_IRQn 0 */
+
+  /* USER CODE END UCPD1_IRQn 0 */
+  USBPD_PORT0_IRQHandler();
+
+  /* USER CODE BEGIN UCPD1_IRQn 1 */
+
+  /* USER CODE END UCPD1_IRQn 1 */
+}
+
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-

@@ -26,7 +26,7 @@
 /*  PORT SPECIFIC C INFORMATION                            RELEASE        */
 /*                                                                        */
 /*    tx_port.h                                         Cortex-M4/GNU     */
-/*                                                           6.1          */
+/*                                                           6.1.11       */
 /*                                                                        */
 /*  AUTHOR                                                                */
 /*                                                                        */
@@ -47,10 +47,10 @@
 /*                                                                        */
 /*    DATE              NAME                      DESCRIPTION             */
 /*                                                                        */
-/*  09-30-2020     William E. Lamie         Initial Version 6.1           */
-/*  04-02-2021     Bhupendra Naphade        Modified comment(s),updated   */
-/*                                            macro definition,           */
-/*                                            resulting in version 6.1.6  */
+/*  10-15-2021      Scott Larson            Initial Version 6.1.9         */
+/*  04-25-2022      Scott Larson            Modified comments and added   */
+/*                                            volatile to registers,      */
+/*                                            resulting in version 6.1.11 */
 /*                                                                        */
 /**************************************************************************/
 
@@ -116,7 +116,7 @@ typedef unsigned short                          USHORT;
 #endif
 
 
-/* Define various constants for the ThreadX Cortex-M7 port.  */
+/* Define various constants for the ThreadX Cortex-M4 port.  */
 
 #define TX_INT_DISABLE                          1           /* Disable interrupts               */
 #define TX_INT_ENABLE                           0           /* Enable interrupts                */
@@ -126,13 +126,13 @@ typedef unsigned short                          USHORT;
    For example, if the time source is at the address 0x0a800024 and is 16-bits in size, the clock 
    source constants would be:
 
-#define TX_TRACE_TIME_SOURCE                    *((ULONG *) 0x0a800024)
+#define TX_TRACE_TIME_SOURCE                    *((volatile ULONG *) 0x0a800024)
 #define TX_TRACE_TIME_MASK                      0x0000FFFFUL
 
 */
 
 #ifndef TX_TRACE_TIME_SOURCE
-#define TX_TRACE_TIME_SOURCE                    *((ULONG *) 0xE0001004)  
+#define TX_TRACE_TIME_SOURCE                    *((volatile ULONG *) 0xE0001004)
 #endif
 #ifndef TX_TRACE_TIME_MASK
 #define TX_TRACE_TIME_MASK                      0xFFFFFFFFUL
@@ -142,7 +142,7 @@ typedef unsigned short                          USHORT;
 /* Define the port specific options for the _tx_build_options variable. This variable indicates
    how the ThreadX library was built.  */
 
-#define TX_PORT_SPECIFIC_BUILD_OPTIONS          0
+#define TX_PORT_SPECIFIC_BUILD_OPTIONS          (0)
 
 
 /* Define the in-line initialization constant so that modules with in-line
@@ -217,7 +217,6 @@ typedef unsigned short                          USHORT;
 
 #define TX_THREAD_CREATE_EXTENSION(thread_ptr)                                  
 #define TX_THREAD_DELETE_EXTENSION(thread_ptr)                                  
-
 
 #ifdef TX_ENABLE_FPU_SUPPORT
 
@@ -295,7 +294,7 @@ __attribute__( ( always_inline ) ) static inline void __set_control(ULONG contro
                                                                         else                                                                                      \
                                                                         {                                                                                         \
                                                                         ULONG  _tx_fpccr;                                                                         \
-                                                                            _tx_fpccr =  *((ULONG *) 0xE000EF34);                                                 \
+                                                                            _tx_fpccr =  *((volatile ULONG *) 0xE000EF34);                                        \
                                                                             _tx_fpccr =  _tx_fpccr & ((ULONG) 0x01);                                              \
                                                                             if (_tx_fpccr == ((ULONG) 0x01))                                                      \
                                                                             {                                                                                     \
@@ -354,8 +353,6 @@ __attribute__( ( always_inline ) ) static inline void __set_control(ULONG contro
 #endif
 
 
-
-
 /* Define the ThreadX object creation extensions for the remaining objects.  */
 
 #define TX_BLOCK_POOL_CREATE_EXTENSION(pool_ptr)
@@ -407,6 +404,7 @@ ULONG   _tx_misra_ipsr_get(VOID);
 #ifndef TX_THREAD_SYSTEM_RETURN_CHECK
 #define TX_THREAD_SYSTEM_RETURN_CHECK(c)    (c) = ((ULONG) _tx_thread_preempt_disable);
 #endif
+
 
 /* Define the macro to ensure _tx_thread_preempt_disable is set early in initialization in order to 
    prevent early scheduling on Cortex-M parts.  */
@@ -466,7 +464,8 @@ __attribute__( ( always_inline ) ) static inline void _tx_thread_system_return_i
 {
 unsigned int interrupt_save;
 
-    *((ULONG *) 0xE000ED04) = ((ULONG) 0x10000000);
+    /* Set PendSV to invoke ThreadX scheduler.  */
+    *((volatile ULONG *) 0xE000ED04) = ((ULONG) 0x10000000);
     if (__get_ipsr_value() == 0)
     {
         interrupt_save = __get_primask_value();
@@ -496,8 +495,8 @@ unsigned int interrupt_save;
 #endif
 
 
-/* Define FPU extension for the Cortex-M4.  Each is assumed to be called in the context of the executing
-   thread. This is for legacy only, and not needed anylonger.  */
+/* Define FPU extension for the Cortex-M4. Each is assumed to be called in the context of the executing
+   thread. These are no longer needed, but are preserved for backward compatibility only.  */
 
 void    tx_thread_fpu_enable(void);
 void    tx_thread_fpu_disable(void);
@@ -507,15 +506,10 @@ void    tx_thread_fpu_disable(void);
 
 #ifdef TX_THREAD_INIT
 CHAR                            _tx_version_id[] = 
-                                    "Copyright (c) Microsoft Corporation. All rights reserved.  *  ThreadX Cortex-M4/GNU Version 6.1.6 *";
+                                    "Copyright (c) Microsoft Corporation. All rights reserved.  *  ThreadX Cortex-M4/GNU Version 6.1.11 *";
 #else
 extern  CHAR                    _tx_version_id[];
 #endif
 
 
 #endif
-
-
-
-
-

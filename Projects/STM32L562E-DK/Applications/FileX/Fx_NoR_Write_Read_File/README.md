@@ -34,13 +34,13 @@ The number of occupied sectors is also shown.
 
 #### <b>Expected success behavior</b>
 
-Successful operation is marked by a toggeling green led light.
+Successful operation is marked by a toggling green led light.
 
 Also, information regarding the total and available size of the flash media is printed to the serial port.
 
 #### <b>Error behaviors</b>
 
-On failure, the red led starts toggeling while the green led is switched off.
+On failure, the red led starts toggling while the green led is switched off.
 
 #### <b>Assumptions if any</b>
 None

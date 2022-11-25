@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32L552ZETxQ</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32L5xx_DFP.1.0.9</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32L5xx_DFP.1.4.0</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2003FFFF) IROM(0x8000000-0x807FFFF) CLOCK(8000000) FPU3(SFPU) CPUTYPE("Cortex-M33") ELITTLE TZ DSP</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -186,6 +186,7 @@
             <RvdsVP>2</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
+            <nBranchProt>0</nBranchProt>
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -417,6 +418,16 @@
               <FileName>app_filex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../FileX/App/app_filex.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Doc</GroupName>
+          <Files>
+            <File>
+              <FileName>README.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>../README.md</FilePath>
             </File>
           </Files>
         </Group>

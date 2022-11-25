@@ -67,9 +67,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/NonSecure/Src/stm32l5xx_it.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/tx_initialize_low_level.s</name>
+			<name>Application/User/tx_initialize_low_level.S</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/NonSecure/Src/tx_initialize_low_level.s</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/NonSecure/Src/tx_initialize_low_level.S</locationURI>
 		</link>
 		<link>
 			<name>Drivers/CMSIS/system_stm32l5xx_ns.c</name>
@@ -584,12 +584,12 @@
 		<link>
 			<name>Middlewares/ThreadX/RTOS/ThreadX/Core/Non_Secure/tx_thread_stack_error_handler.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/ports/cortex_m33/gnu/src/tx_thread_stack_error_handler.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/common/src/tx_thread_stack_error_handler.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ThreadX/RTOS/ThreadX/Core/Non_Secure/tx_thread_stack_error_notify.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/ports/cortex_m33/gnu/src/tx_thread_stack_error_notify.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/ST/threadx/common/src/tx_thread_stack_error_notify.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ThreadX/RTOS/ThreadX/Core/Non_Secure/tx_thread_suspend.c</name>

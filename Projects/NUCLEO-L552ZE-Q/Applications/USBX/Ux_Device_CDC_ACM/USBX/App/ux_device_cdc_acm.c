@@ -73,7 +73,7 @@ uint32_t UserTxBufPtrOut;
 
 /* uart3 handler */
 extern UART_HandleTypeDef hlpuart1;
-
+extern TX_EVENT_FLAGS_GROUP EventFlag;
 UX_SLAVE_CLASS_CDC_ACM_LINE_CODING_PARAMETER CDC_VCP_LineCoding =
 {
   115200, /* baud rate */
@@ -286,8 +286,10 @@ void usbx_cdc_acm_read_thread_entry(ULONG arg)
       {
         cdc_acm =  data_interface->ux_slave_interface_class_instance;
 
+#ifndef UX_DEVICE_CLASS_CDC_ACM_TRANSMISSION_DISABLE
         /* Set transmission_status to UX_FALSE for the first time */
         cdc_acm -> ux_slave_class_cdc_acm_transmission_status = UX_FALSE;
+#endif /* UX_DEVICE_CLASS_CDC_ACM_TRANSMISSION_DISABLE */
 
         /* Read the received data in blocking mode */
         ux_device_class_cdc_acm_read(cdc_acm, (UCHAR *)UserRxBufferFS, 64,
@@ -352,7 +354,9 @@ void usbx_cdc_acm_write_thread_entry(ULONG arg)
     /* Get the cdc Instance */
     cdc_acm = data_interface->ux_slave_interface_class_instance;
 
+#ifndef UX_DEVICE_CLASS_CDC_ACM_TRANSMISSION_DISABLE
     cdc_acm -> ux_slave_class_cdc_acm_transmission_status = UX_FALSE;
+#endif
 
     /* Check if there is a new data to send */
     if (UserTxBufPtrOut != UserTxBufPtrIn)
@@ -445,7 +449,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
 {
   /* Transfer error occurred in reception and/or transmission process */
-  Error_Handler();
+  if (UartHandle != NULL)
+  {
+    if(UartHandle->ErrorCode != HAL_UART_ERROR_NONE)
+    {
+      Error_Handler();
+    }
+  }
 }
 
 /**

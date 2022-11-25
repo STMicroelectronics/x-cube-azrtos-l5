@@ -26,9 +26,9 @@ Azure RTOS is a professional grade, highly reliable and market proven Middleware
 
 One of the following toolchains:
 
-- IAR Embedded Workbench for ARM (EWARM)toolchain 8.50.6 + ST-LINKV2/V3
-- [STM32CubeIDE V1.7.0](https://www.st.com/en/development-tools/stm32cubeide.html)  + ST-LINKV2/V3
-- RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.32 + ST-LINKV2/V3
+- IAR Embedded Workbench for ARM (EWARM)toolchain 8.50.9 + ST-LINKV2/V3
+- [STM32CubeIDE V1.11.0](https://www.st.com/en/development-tools/stm32cubeide.html)  + ST-LINKV2/V3
+- RealView Microcontroller Development Kit (MDK-ARM) toolchain V5.37 + ST-LINKV2/V3
 
 ## Supported Devices and Boards by Applications
 - [NUCLEO-L552ZE-Q](https://www.st.com/en/evaluation-tools/nucleo-l552ze-q.html) *(MB1361C)*
@@ -67,16 +67,16 @@ Details about the content of this release are available in the release note [her
 
 | Middleware   |  Applications                    |       Short Description      |
 |--------------|----------------------------------|------------------------------|
-|ThreadX | Tx_Thread_Creation           | It demonstrates how to create and destroy multiple threads using Azure RTOS ThreadX APIs. In addition, it shows how to use preemption threshold between threads and change priorities on-fly. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/ThreadX/Tx_Thread_Creation/README.md) |
-|ThreadX | Tx_LowPower                  | It demonstrates how to configure the LowPower feature of Azure RTOS ThreadX stack. In addition, it shows how to use ThreadX MACRO related to the LowPower feature. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/ThreadX/Tx_LowPower/README.md) |
-|ThreadX | Tx_MPU                       | It demonstrates how to load, start and unload modules. In addition, it shows how ThreadX memory protection on modules using the Memory Protection Unit (MPU). [readme](./Projects/STM32L562E-DK/Applications/ThreadX/Tx_MPU/README.md) |
-|ThreadX | Tx_SecureLEDToggle_TrustZone | It demonstrates how to develop an application using the ThreadX when the TrustZone feature is enabled (TZEN=1). The application is running ThreadX thread in non-secure context that is invoking a secure function to toggle a led each 1 sec. [readme](./Projects/STM32L562E-DK/Applications/ThreadX/Tx_SecureLEDToggle_TrustZone/README.md) |
-|USBX    | Ux_Device_CDC_ACM            | It demonstrates how to develop USB Device communication Class "CDC_ACM" based application. The application is designed to emulate an USB-to-UART bridge following the Virtual COM Port (VCP) implementation, the code provides all required device descriptors framework and associated Class descriptor report to build a compliant USB CDC_ACM device. [readme](./Projects/NUCLEO-L552ZE-Q//Applications/USBX/Ux_Device_CDC_ACM/README.md). |
-|USBX    | Ux_Device_HID                | It demonstrates how to develop USB Device Human Interface "HID" mouse based application. The application is designed to emulate an USB HID mouse device, the code provides all required device descriptors framework and associated Class descriptor report to build a compliant USB HID mouse device. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/USBX/Ux_Device_HID/README.md)  |
-|FileX   | Fx_uSD_File_Edit             | It demonstrates how to develop a basic SD card file operations application. The application is designed to handle SD card insertion/removal events, and depending on that state, it starts and stops file operations from and into the SD card. [readme](./Projects/STM32L562E-DK/Applications/FileX/Fx_uSD_File_Edit/README.md)  |
-|FileX   | Fx_NoR_Write_Read_File       | It demonstrates how to create a Fat File system on the NOR flash using FileX alongside LevelX. The application is designed to execute file operations on the MX25LM51245G NOR flash device, the code provides all required software code for properly managing it. [readme](./Projects/STM32L562E-DK/Applications/FileX/Fx_NoR_Write_Read_File/README.md) |
-|FileX   | Fx_SRAM_File_Edit_Standalone | It demonstrates how to create a Fat File system on the internal SRAM memory using FileX running in standalone mode without ThreadX. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/FileX/Fx_SRAM_File_Edit_Standalone/README.md) |
-  
+|ThreadX       | Tx_Thread_Creation               | It demonstrates how to create and destroy multiple threads using Azure RTOS ThreadX APIs. In addition, it shows how to use preemption threshold between threads and change priorities on-fly. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/ThreadX/Tx_Thread_Creation/README.md) |
+|ThreadX       | Tx_LowPower                      | It demonstrates how to configure the LowPower feature of Azure RTOS ThreadX stack. In addition, it shows how to use ThreadX MACRO related to the LowPower feature. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/ThreadX/Tx_LowPower/README.md) |
+|ThreadX       | Tx_MPU                           | It demonstrates how to load, start and unload modules. In addition, it shows how ThreadX memory protection on modules using the Memory Protection Unit (MPU). [readme](./Projects/STM32L562E-DK/Applications/ThreadX/Tx_MPU/README.md) |
+|ThreadX       | Tx_SecureLEDToggle_TrustZone     | It demonstrates how to develop an application using the ThreadX when the TrustZone feature is enabled (TZEN=1). The application is running ThreadX thread in non-secure context that is invoking a secure function to toggle a led each 1 sec. [readme](./Projects/STM32L562E-DK/Applications/ThreadX/Tx_SecureLEDToggle_TrustZone/README.md) |
+|USBX          | Ux_Device_CDC_ACM                | It demonstrates how to develop USB Device communication Class "CDC_ACM" based application. The application is designed to emulate an USB-to-UART bridge following the Virtual COM Port (VCP) implementation, the code provides all required device descriptors framework and associated Class descriptor report to build a compliant USB CDC_ACM device. [readme](./Projects/NUCLEO-L552ZE-Q//Applications/USBX/Ux_Device_CDC_ACM/README.md). |
+|USBX          | Ux_Device_HID                    | It demonstrates how to develop USB Device Human Interface "HID" mouse based application. The application is designed to emulate an USB HID mouse device, the code provides all required device descriptors framework and associated Class descriptor report to build a compliant USB HID mouse device. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/USBX/Ux_Device_HID/README.md)  |
+|FileX         | Fx_uSD_File_Edit                 | It demonstrates how to develop a basic SD card file operations application. The application is designed to handle SD card insertion/removal events, and depending on that state, it starts and stops file operations from and into the SD card. [readme](./Projects/STM32L562E-DK/Applications/FileX/Fx_uSD_File_Edit/README.md)  |
+|FileX         | Fx_NoR_Write_Read_File           | It demonstrates how to create a Fat File system on the NOR flash using FileX alongside LevelX. The application is designed to execute file operations on the MX25LM51245G NOR flash device, the code provides all required software code for properly managing it. [readme](./Projects/STM32L562E-DK/Applications/FileX/Fx_NoR_Write_Read_File/README.md) |
+|FileX         | Fx_SRAM_File_Edit_Standalone     | It demonstrates how to create a Fat File system on the internal SRAM memory using FileX running in standalone mode without ThreadX. [readme](./Projects/NUCLEO-L552ZE-Q/Applications/FileX/Fx_SRAM_File_Edit_Standalone/README.md) |
+|USBPD         | USBPD_SNK_UX_Device_HID_CDC_ACM  | It demonstrates how to develop a USBPD type C Consumer and USB Device using Azure RTOS USBX stack on STM32L562E-DK board. [readme](./Projects/STM32L562E-DK/Applications/USBPD/USBPD_Sink_Ux_Device_HID_CDC_ACM/README.md) |
  
 ## Troubleshooting
 **Caution**  : The issues are  **strictly limited**  to submit problems or suggestions related to the software delivered in this repository.

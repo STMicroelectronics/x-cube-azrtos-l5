@@ -95,6 +95,7 @@ void HAL_SD_MspInit(SD_HandleTypeDef* hsd)
   /* USER CODE BEGIN SDMMC1_MspInit 0 */
 
   /* USER CODE END SDMMC1_MspInit 0 */
+
   /** Initializes the peripherals clock
   */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_SDMMC1;
@@ -183,4 +184,3 @@ void HAL_SD_MspDeInit(SD_HandleTypeDef* hsd)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-

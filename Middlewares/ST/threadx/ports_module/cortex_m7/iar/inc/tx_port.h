@@ -26,7 +26,7 @@
 /*  PORT SPECIFIC C INFORMATION                            RELEASE        */
 /*                                                                        */
 /*    tx_port.h                                         Cortex-M7/IAR     */
-/*                                                           6.1          */
+/*                                                           6.1.11       */
 /*                                                                        */
 /*  AUTHOR                                                                */
 /*                                                                        */
@@ -47,7 +47,10 @@
 /*                                                                        */
 /*    DATE              NAME                      DESCRIPTION             */
 /*                                                                        */
-/*  09-30-2020     William E. Lamie         Initial Version 6.1           */
+/*  10-15-2021      Scott Larson            Initial Version 6.1.9         */
+/*  04-25-2022      Scott Larson            Modified comments and added   */
+/*                                            volatile to registers,      */
+/*                                            resulting in version 6.1.11 */
 /*                                                                        */
 /**************************************************************************/
 
@@ -71,7 +74,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <intrinsics.h>
-#ifdef  TX_ENABLE_IAR_LIBRARY_SUPPORT
+#ifdef TX_ENABLE_IAR_LIBRARY_SUPPORT
 #include <yvals.h>
 #endif
 
@@ -117,7 +120,7 @@ typedef unsigned short                          USHORT;
 #endif
 
 
-/* Define various constants for the ThreadX Cortex-M3 port.  */
+/* Define various constants for the ThreadX Cortex-M7 port.  */
 
 #define TX_INT_DISABLE                          1           /* Disable interrupts               */
 #define TX_INT_ENABLE                           0           /* Enable interrupts                */
@@ -127,14 +130,14 @@ typedef unsigned short                          USHORT;
    For example, if the time source is at the address 0x0a800024 and is 16-bits in size, the clock 
    source constants would be:
 
-#define TX_TRACE_TIME_SOURCE                    *((ULONG *) 0x0a800024)
+#define TX_TRACE_TIME_SOURCE                    *((volatile ULONG *) 0x0a800024)
 #define TX_TRACE_TIME_MASK                      0x0000FFFFUL
 
 */
 
 #ifndef TX_MISRA_ENABLE
 #ifndef TX_TRACE_TIME_SOURCE
-#define TX_TRACE_TIME_SOURCE                    *((ULONG *) 0xE0001004)  
+#define TX_TRACE_TIME_SOURCE                    *((volatile ULONG *) 0xE0001004)
 #endif
 #else
 ULONG   _tx_misra_time_stamp_get(VOID);
@@ -180,8 +183,8 @@ ULONG   _tx_misra_time_stamp_get(VOID);
    for the multiple macros is so that backward compatibility can be maintained with 
    existing ThreadX kernel awareness modules.  */
 
-#define TX_THREAD_EXTENSION_0          
-#define TX_THREAD_EXTENSION_1                  
+#define TX_THREAD_EXTENSION_0
+#define TX_THREAD_EXTENSION_1
 #ifdef  TX_ENABLE_IAR_LIBRARY_SUPPORT
 #define TX_THREAD_EXTENSION_2               VOID    *tx_thread_module_instance_ptr;         \
                                             VOID    *tx_thread_module_entry_info_ptr;       \
@@ -224,13 +227,16 @@ ULONG   _tx_misra_time_stamp_get(VOID);
 
 #define TX_BLOCK_POOL_EXTENSION
 #define TX_BYTE_POOL_EXTENSION
+#define TX_MUTEX_EXTENSION
 #define TX_EVENT_FLAGS_GROUP_EXTENSION          VOID    *tx_event_flags_group_module_instance; \
                                                 VOID   (*tx_event_flags_group_set_module_notify)(struct TX_EVENT_FLAGS_GROUP_STRUCT *group_ptr);
-#define TX_MUTEX_EXTENSION
+
 #define TX_QUEUE_EXTENSION                      VOID    *tx_queue_module_instance; \
                                                 VOID   (*tx_queue_send_module_notify)(struct TX_QUEUE_STRUCT *queue_ptr);
+
 #define TX_SEMAPHORE_EXTENSION                  VOID    *tx_semaphore_module_instance; \
                                                 VOID   (*tx_semaphore_put_module_notify)(struct TX_SEMAPHORE_STRUCT *semaphore_ptr);
+
 #define TX_TIMER_EXTENSION                      VOID    *tx_timer_module_instance; \
                                                 VOID   (*tx_timer_module_expiration_function)(ULONG id);
 
@@ -322,7 +328,7 @@ void   _tx_misra_vfp_touch(void);
                                                                         else                                                                                      \
                                                                         {                                                                                         \
                                                                         ULONG  _tx_fpccr;                                                                         \
-                                                                            _tx_fpccr =  *((ULONG *) 0xE000EF34);                                                 \
+                                                                            _tx_fpccr =  *((volatile ULONG *) 0xE000EF34);                                        \
                                                                             _tx_fpccr =  _tx_fpccr & ((ULONG) 0x01);                                              \
                                                                             if (_tx_fpccr == ((ULONG) 0x01))                                                      \
                                                                             {                                                                                     \
@@ -449,12 +455,6 @@ ULONG   _tx_misra_ipsr_get(VOID);
    is used to define a local function save area for the disable and restore
    macros.  */
 
-/* The embedded assembler blocks are design so as to be inlinable by the
-   armlink linker inlining. This requires them to consist of either a
-   single 32-bit instruction, or either one or two 16-bit instructions
-   followed by a "BX lr". Note that to reduce the critical region size, the
-   16-bit "CPSID i" instruction is preceeded by a 16-bit NOP */
-
 #ifdef TX_DISABLE_INLINE
 
 UINT                                            _tx_thread_interrupt_disable(VOID);
@@ -479,7 +479,7 @@ static void _tx_thread_system_return_inline(void)
 __istate_t interrupt_save;
 
     /* Set PendSV to invoke ThreadX scheduler.  */
-    *((ULONG *) 0xE000ED04) = ((ULONG) 0x10000000);
+    *((volatile ULONG *) 0xE000ED04) = ((ULONG) 0x10000000);
     if (__get_IPSR() == 0)
     {
         interrupt_save = __get_interrupt_state();
@@ -512,7 +512,7 @@ void    tx_thread_fpu_disable(void);
 
 #ifdef TX_THREAD_INIT
 CHAR                            _tx_version_id[] = 
-                                    "Copyright (c) Microsoft Corporation. All rights reserved.  *  ThreadX Cortex-M7/IAR Version 6.1 *";
+                                    "Copyright (c) Microsoft Corporation. All rights reserved.  *  ThreadX Cortex-M7/IAR Version 6.1.10 *";
 #else
 #ifdef TX_MISRA_ENABLE
 extern  CHAR                    _tx_version_id[100];
@@ -523,6 +523,3 @@ extern  CHAR                    _tx_version_id[];
 
 
 #endif
-
-
-

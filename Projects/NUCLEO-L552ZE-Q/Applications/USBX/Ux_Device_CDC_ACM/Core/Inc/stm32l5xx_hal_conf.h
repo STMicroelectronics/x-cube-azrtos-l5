@@ -34,7 +34,7 @@
   * @brief This is the list of modules to be used in the HAL driver
   */
 #define HAL_MODULE_ENABLED
-/*#define HAL_ADC_MODULE_ENABLED   */
+#define HAL_ADC_MODULE_ENABLED
 /*#define HAL_COMP_MODULE_ENABLED   */
 /*#define HAL_CRC_MODULE_ENABLED   */
 /*#define HAL_CRYP_MODULE_ENABLED   */
@@ -45,7 +45,7 @@
 /*#define HAL_HASH_MODULE_ENABLED   */
 /*#define HAL_IRDA_MODULE_ENABLED   */
 /*#define HAL_IWDG_MODULE_ENABLED   */
-/*#define HAL_LPTIM_MODULE_ENABLED   */
+#define HAL_LPTIM_MODULE_ENABLED
 /*#define HAL_MMC_MODULE_ENABLED   */
 /*#define HAL_NAND_MODULE_ENABLED   */
 /*#define HAL_NOR_MODULE_ENABLED   */
@@ -168,7 +168,7 @@
   */
 
 #define  VDD_VALUE					  3300UL /*!< Value of VDD in mv */
-#define  TICK_INT_PRIORITY            7UL    /*!< tick interrupt priority */
+#define  TICK_INT_PRIORITY            0UL    /*!< tick interrupt priority */
 #define  USE_RTOS                     0U
 
 /* ########################## Assert Selection ############################## */

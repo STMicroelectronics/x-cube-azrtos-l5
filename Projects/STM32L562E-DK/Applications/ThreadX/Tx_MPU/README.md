@@ -28,7 +28,7 @@ MainThread is expected to execute data read and write operations to/from user-de
 
 #### <b>Error behaviors</b>
 
-On failure, the orange LED starts toggeling while the green LED is switched OFF.
+On failure, the orange LED starts toggling while the green LED is switched OFF.
 
 #### <b>Assumptions if any</b>
 None
@@ -79,7 +79,7 @@ None
 
 ### <b>Keywords</b>
 
-RTOS, ThreadX, Thread, Message Queue, Module Manager, Module, MPU
+RTOS, ThreadX, Threading, Message Queue, Module Manager, Module, MPU
 
 
 ### <b>Hardware and Software environment</b>

@@ -100,7 +100,7 @@ Please refer to AN5347 for more details.
          
 ### <b>Keywords</b>
 
-RTOS, ThreadX, Thread, TrustZone, TZEN
+RTOS, ThreadX, Threading, TrustZone, TZEN
 
 
 ### <b>Hardware and Software environment</b>
