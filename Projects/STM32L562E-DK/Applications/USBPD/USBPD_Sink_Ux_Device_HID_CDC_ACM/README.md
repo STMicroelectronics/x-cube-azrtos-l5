@@ -1,3 +1,4 @@
+
 ## <b>USBPD_Sink_Ux_Device_HID_CDC_ACM application description</b>
 
 This application provides an example of Azure RTOS USBX stack usage on STM32L562E-DK board, it shows how to develop a composite USB Device communication
@@ -51,7 +52,7 @@ When plugged to PC host, the STM32L562xx must be properly enumerated a composite
 During the enumeration phase, the device must provide host with the requested descriptors (Device descriptor, configuration descriptor, string descriptors).
 Those descriptors are used by host driver to identify the device capabilities. Once STM32L562E-DK USB device successfully completed the enumeration phase.
 Connect USB cable to Host , Open two hyperterminals (USB com port and UART com port) to send/receive data to/from host to/from device.
-When USER_Button is pressed, the device sneds a HID report. Each report sent should move the PC host machine mouse cursor by one step.
+When USER_Button is pressed, the device sends a HID report. Each report sent should move the PC host machine mouse cursor by one step.
 
 #### <b>Error behaviors</b>
 
@@ -125,8 +126,8 @@ RTOS, ThreadX, USBX, USBXDevice, USB_DRD, Full Speed, CDC, HID, VCP, USART, DMA,
       - Parity = None
       - Flow control = None
 
-  - The USART3 interface available on PC10 and PC11 of the microcontroller are connected to ST-LINK MCU.
-  - By default the USART3 communication between the target MCU and ST-LINK MCU is enabled. It's configuration is as following:
+  - The USART1 interface available on PA9 and PA10 of the microcontroller are connected to ST-LINK MCU.
+  - By default the USART1 communication between the target MCU and ST-LINK MCU is enabled. It's configuration is as following:
     - BaudRate = 115200 baud
     - Word Length = 8 Bits
     - Stop Bit = 1
@@ -135,7 +136,7 @@ RTOS, ThreadX, USBX, USBXDevice, USB_DRD, Full Speed, CDC, HID, VCP, USART, DMA,
 
 <b>Note</b>
 
-  - When we configure the VCP baudrate under 9600 the USART3 baudrate shall be set to 9600.
+  - When we configure the VCP baudrate under 9600 the USART1 baudrate shall be set to 9600.
 
 ### <b>How to use it ?</b>
 

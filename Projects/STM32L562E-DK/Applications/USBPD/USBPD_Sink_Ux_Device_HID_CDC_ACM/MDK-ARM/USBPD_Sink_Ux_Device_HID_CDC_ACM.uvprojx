@@ -10,7 +10,7 @@
       <TargetName>USBPD_Sink_Ux_Device_HID_CDC_ACM</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6140001::V6.14.1::ARMCLANG</pCCUsed>
+      <pCCUsed>6180000::V6.18::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -190,7 +190,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -207,7 +207,7 @@
             <Ro2Chk>0</Ro2Chk>
             <Ro3Chk>0</Ro3Chk>
             <Ir1Chk>1</Ir1Chk>
-            <Ir2Chk>1</Ir2Chk>
+            <Ir2Chk>0</Ir2Chk>
             <Ra1Chk>0</Ra1Chk>
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_FULL_LL_DRIVER,USBPD_PORT_COUNT=1,_SNK,USBPDCORE_LIB_PD3_FULL,TX_SINGLE_MODE_NON_SECURE,TX_INCLUDE_USER_DEFINE_FILE,UX_INCLUDE_USER_DEFINE_FILE,USE_HAL_DRIVER,STM32L562xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../AZURE_RTOS/App;../USBX/App;../USBX/Target;../USBPD/App;../USBPD/Target;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Middlewares/ST/usbx/common/core/inc/;../../../../../../Middlewares/ST/usbx/ports/generic/inc/;../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/inc/;../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/;../../../../../../Middlewares/ST/threadx/common/inc/;../../../../../../Middlewares/ST/threadx/ports/cortex_m33/ac6/inc/</IncludePath>
+              <IncludePath>../Core/Inc;../AZURE_RTOS/App;../USBX/App;../USBX/Target;../USBPD/App;../USBPD/Target;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Middlewares/ST/STM32_USBPD_Library/Core/inc;../../../../../../Middlewares/ST/STM32_USBPD_Library/Devices/STM32L5XX/inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Middlewares/ST/usbx/common/core/inc/;../../../../../../Middlewares/ST/usbx/ports/generic/inc/;../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/;../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/inc/;../../../../../../Middlewares/ST/threadx/common/inc/;../../../../../../Middlewares/ST/threadx/ports/cortex_m33/ac6/inc/</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -867,101 +867,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Middlewares/USBX/USB/USBX/UX Device Class HID</GroupName>
-          <Files>
-            <File>
-              <FileName>ux_device_class_hid_activate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_activate.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_control_request.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_control_request.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_deactivate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_deactivate.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_descriptor_send.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_descriptor_send.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_entry.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_entry.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_event_get.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_event_get.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_event_set.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_event_set.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_initialize.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_initialize.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_interrupt_thread.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_interrupt_thread.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_report_get.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_report_get.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_report_set.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_report_set.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_uninitialize.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_uninitialize.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_read.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_read.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_receiver_event_free.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_receiver_event_free.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_receiver_event_get.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_receiver_event_get.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_receiver_initialize.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_receiver_initialize.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_receiver_thread.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_receiver_thread.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_device_class_hid_receiver_uninitialize.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_receiver_uninitialize.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Middlewares/USBX/USB/USBX/CoreSystem</GroupName>
           <Files>
             <File>
@@ -1225,6 +1130,11 @@
               <FilePath>../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_timer_create.c</FilePath>
             </File>
             <File>
+              <FileName>ux_utility_timer_delete.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_timer_delete.c</FilePath>
+            </File>
+            <File>
               <FileName>ux_utility_unicode_to_string.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/usbx/common/core/src/ux_utility_unicode_to_string.c</FilePath>
@@ -1310,6 +1220,11 @@
               <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_interrupt_handler.c</FilePath>
             </File>
             <File>
+              <FileName>ux_dcd_stm32_transfer_abort.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_transfer_abort.c</FilePath>
+            </File>
+            <File>
               <FileName>ux_dcd_stm32_transfer_request.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_transfer_request.c</FilePath>
@@ -1318,11 +1233,6 @@
               <FileName>ux_dcd_stm32_uninitialize.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_uninitialize.c</FilePath>
-            </File>
-            <File>
-              <FileName>ux_dcd_stm32_transfer_abort.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_stm32_device_controllers/ux_dcd_stm32_transfer_abort.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1388,6 +1298,71 @@
               <FileName>ux_device_class_cdc_acm_write_with_callback.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_cdc_acm_write_with_callback.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/USBX/USB/USBX/UX Device Class HID Core</GroupName>
+          <Files>
+            <File>
+              <FileName>ux_device_class_hid_activate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_activate.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_control_request.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_control_request.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_deactivate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_deactivate.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_descriptor_send.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_descriptor_send.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_entry.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_entry.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_event_get.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_event_get.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_event_set.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_event_set.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_initialize.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_initialize.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_interrupt_thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_interrupt_thread.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_report_get.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_report_get.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_report_set.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_report_set.c</FilePath>
+            </File>
+            <File>
+              <FileName>ux_device_class_hid_uninitialize.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/usbx/common/usbx_device_classes/src/ux_device_class_hid_uninitialize.c</FilePath>
             </File>
           </Files>
         </Group>

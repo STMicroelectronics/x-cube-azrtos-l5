@@ -63,9 +63,9 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void   MX_USB_PCD_Init(void);
-void   MX_LPUART1_UART_Init(void);
-void   MX_ICACHE_Init(void);
+void MX_LPUART1_UART_Init(void);
+void MX_USB_PCD_Init(void);
+void MX_ICACHE_Init(void);
 
 /* USER CODE BEGIN EFP */
 

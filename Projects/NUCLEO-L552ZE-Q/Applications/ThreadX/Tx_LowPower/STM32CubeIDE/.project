@@ -168,9 +168,14 @@
 			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim_ex.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM32L5xx_Nucleo/stm32l5xx_nucleo.c</name>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_uart.c</name>
 			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/STM32L5xx_Nucleo/stm32l5xx_nucleo.c</locationURI>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32L5xx_HAL_Driver/stm32l5xx_hal_uart_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/ThreadX/RTOS/ThreadX/Low Power support/tx_low_power.c</name>

@@ -72,7 +72,7 @@ CMSE_NS_ENTRY void SECURE_RegisterCallback(SECURE_CallbackIDTypeDef CallbackId, 
   */
 CMSE_NS_ENTRY void SECURE_LEDToggle(void)
 {
-  BSP_LED_Toggle(LED_GREEN);
+  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 }
 
 /**

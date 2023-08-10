@@ -34,11 +34,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Doc/README.md</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/README.md</locationURI>
-		</link>
-		<link>
 			<name>Drivers/CMSIS/system_stm32l5xx.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/system_stm32l5xx.c</locationURI>
@@ -177,11 +172,6 @@
 			<name>Application/User/Core/tx_initialize_low_level.S</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/tx_initialize_low_level.S</locationURI>
-		</link>
-		<link>
-			<name>Drivers/BSP/Components/mx25lm51245g.c</name>
-			<type>1</type>
-			<locationURI>PARENT-6-PROJECT_LOC/Drivers/BSP/Components/mx25lm51245g/mx25lm51245g.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/AZURE_RTOS/App/app_azure_rtos.c</name>

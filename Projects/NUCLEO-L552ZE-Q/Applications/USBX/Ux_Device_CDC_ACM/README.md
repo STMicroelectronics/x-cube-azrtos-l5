@@ -7,7 +7,7 @@ and associated Class descriptor report to build a compliant USB CDC_ACM device.
 At the beginning ThreadX call the entry function tx_application_define(), at this stage, all USBx resources are initialized, the CDC_ACM Class driver is registered and
 the application creates 3 threads with the same priorities :
 
-  - usbx_app_thread_entry (Prio : 20; PreemptionPrio : 20) used to initialize USB OTG HAL PCD driver and start the device.
+  - app_ux_device_thread_entry (Prio : 10; PreemptionPrio : 10) used to initialize USB HAL PCD driver and start the device.
   - usbx_cdc_acm_read_thread_entry (Prio : 20; PreemptionPrio : 20) used to Read the received data from Virtual COM Port.
   - usbx_cdc_acm_write_thread_entry (Prio : 20; PreemptionPrio : 20) used to send the received data over UART.
 
@@ -22,8 +22,9 @@ During enumeration phase, three communication pipes "endpoints" are declared in 
    When data are received through this endpoint they are saved in the buffer "UserRxBufferFS" then they are transmitted
    over UART using DMA mode and in meanwhile the OUT endpoint is NAKed.
    Once the transmission is over, the OUT endpoint is prepared to receive next packet in HAL_UART_RxCpltCallback().
+
  - 1 x Interrupt IN endpoint for setting and getting serial-port parameters:
-   When control setup is received, the corresponding request is executed in ux_app_parameters_change().
+   When control setup is received, the corresponding request is executed in USBD_CDC_ACM_ParameterChange.
 
 In this application, two requests are implemented:
 
@@ -40,9 +41,9 @@ data at the same time it is transmitting another data (full- duplex feature).
 
 #### <b>Expected success behavior</b>
 
-When plugged to PC host, the STM32L552ZE must be properly enumerated as an USB Serial device and an STlink Com port.
+When plugged to PC host, the NUCLEO-L552ZE-Q must be properly enumerated as an USB Serial device and an STlink Com port.
 During the enumeration phase, the device must provide host with the requested descriptors (Device descriptor, configuration descriptor, string descriptors).
-Those descriptors are used by host driver to identify the device capabilities. Once STM32L552ZE USB device successfully completed the enumeration phase,
+Those descriptors are used by host driver to identify the device capabilities. Once NUCLEO-L552ZE-Q USB device successfully completed the enumeration phase,
 Open two hyperterminals (USB com port and UART com port(USB STLink VCP)) to send/receive data to/from host from/to device.
 
 #### <b>Error behaviors</b>
@@ -54,13 +55,15 @@ Host PC shows that USB device does not operate as designed (CDC Device enumerati
 User is familiar with USB 2.0 "Universal Serial BUS" Specification and CDC_ACM class Specification.
 
 #### <b> Known limitations</b>
-None.
 
+None
+
+### <b>Notes</b>
 
 #### <b>ThreadX usage hints</b>
 
  - ThreadX uses the Systick as time base, thus it is mandatory that the HAL uses a separate time base through the TIM IPs.
- - ThreadX is configured with 100 ticks/sec by default, this should be taken into account when using delays or timeouts at application. It is always possible to reconfigure it in the "tx_user.h", the "TX_TIMER_TICKS_PER_SECOND" define,but this should be reflected in "tx_initialize_low_level.s" file too.
+ - ThreadX is configured with 100 ticks/sec by default, this should be taken into account when using delays or timeouts at application. It is always possible to reconfigure it in the "tx_user.h", the "TX_TIMER_TICKS_PER_SECOND" define,but this should be reflected in "tx_initialize_low_level.S" file too.
  - ThreadX is disabling all interrupts during kernel start-up to avoid any unexpected behavior, therefore all system related calls (HAL, BSP) should be done either at the beginning of the application or inside the thread entry functions.
  - ThreadX offers the "tx_application_define()" function, that is automatically called by the tx_kernel_enter() API.
    It is highly recommended to use it to create all applications ThreadX related resources (threads, semaphores, memory pools...)  but it should not in any way contain a system API call (HAL or BSP).
@@ -70,16 +73,16 @@ None.
    This require changes in the linker files to expose this memory location.
     + For EWARM add the following section into the .icf file:
      ```
-	 place in RAM_region    { last section FREE_MEM };
-	 ```
+     place in RAM_region    { last section FREE_MEM };
+     ```
     + For MDK-ARM:
-	```
+    ```
     either define the RW_IRAM1 region in the ".sct" file
-    or modify the line below in "tx_low_level_initilize.s to match the memory region being used
+    or modify the line below in "tx_initialize_low_level.S to match the memory region being used
         LDR r1, =|Image$$RW_IRAM1$$ZI$$Limit|
-	```
+    ```
     + For STM32CubeIDE add the following section into the .ld file:
-	```
+    ```
     ._threadx_heap :
       {
          . = ALIGN(8);
@@ -87,7 +90,7 @@ None.
          . = . + 64K;
          . = ALIGN(8);
        } >RAM_D1 AT> RAM_D1
-	```
+    ```
 
        The simplest way to provide memory for ThreadX is to define a new section, see ._threadx_heap above.
        In the example above the ThreadX heap size is set to 64KBytes.
@@ -95,19 +98,20 @@ None.
        Caution: Make sure that ThreadX does not need more than the provided heap memory (64KBytes in this example).
        Read more in STM32CubeIDE User Guide, chapter: "Linker script".
 
-    + The "tx_initialize_low_level.s" should be also modified to enable the "USE_DYNAMIC_MEMORY_ALLOCATION" flag.
+    + The "tx_initialize_low_level.S" should be also modified to enable the "USE_DYNAMIC_MEMORY_ALLOCATION" flag.
 
+#### <b>USBX usage hints</b>
 
 ### <b>Keywords</b>
 
-RTOS, ThreadX, USBX, Device, Full Speed, CDC, VCP, USART, DMA.
+RTOS, ThreadX, USBX_Device, USB, Full Speed, CDC, VCP, USART, DMA.
 
 ### <b>Hardware and Software environment</b>
 
-  - This example runs on STM32L552xx devices without security enabled (TZEN=0).
+  - This example runs on STM32L552ZETxQ devices without security enabled (TZEN=0).
   - This example has been tested with STMicroelectronics NUCLEO-L552ZE-Q boards Revision MB1361C and can be easily tailored to any other supported device and development board.
   - NUCLEO-L552ZE-Q Set-up
-  - Connect the NUCLEO-L552ZE-Q board CN13 to the PC through "Type-C" to "Standard A" cable.
+  - Connect the NUCLEO-L552ZE-Q board CN13 to the PC through "TYPE-C" to "Standard A" cable.
   - For VCP the configuration is dynamic for example it can be :
     - BaudRate = 115200 baud
     - Word Length = 8 Bits
@@ -115,8 +119,7 @@ RTOS, ThreadX, USBX, Device, Full Speed, CDC, VCP, USART, DMA.
     - Parity = None
     - Flow control = None
 
-  - The LPUART1 interface available on PD8 and PD9 of the microcontroller are
-  connected to ST-LINK MCU.
+  - The LPUART1 interface available on PG7 and PG8 of the microcontroller are connected to ST-LINK MCU.
   By default the LPUART1 communication between the target MCU and ST-LINK MCU is enabled.
   It's configuration is as following:
     - BaudRate = 115200 baud
@@ -128,7 +131,7 @@ RTOS, ThreadX, USBX, Device, Full Speed, CDC, VCP, USART, DMA.
 <b>Note</b>
 
  - In case User configures USB VCP baudrate under 9600 the LPUART1 baudrate shall be set to 9600.
-
+ 
 ### <b>How to use it ?</b>
 
 In order to make the program work, you must do the following :

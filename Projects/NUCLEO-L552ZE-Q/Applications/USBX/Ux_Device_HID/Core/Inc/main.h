@@ -48,7 +48,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-extern PCD_HandleTypeDef hpcd_USB_FS;
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -63,8 +63,8 @@ extern PCD_HandleTypeDef hpcd_USB_FS;
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void   MX_ICACHE_Init(void);
-void   MX_USB_PCD_Init(void);
+void MX_ICACHE_Init(void);
+void MX_USB_PCD_Init(void);
 
 /* USER CODE BEGIN EFP */
 

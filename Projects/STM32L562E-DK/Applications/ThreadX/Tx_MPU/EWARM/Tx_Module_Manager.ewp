@@ -359,7 +359,6 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\threadx\common\inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\threadx\common_modules\module_manager\inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\threadx\common_modules\inc</state>
-                    <state>$PROJ_DIR$/../../../../../../Drivers\BSP\STM32L562E-DK</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\threadx\ports_module\cortex_m33\iar\inc</state>
                 </option>
                 <option>
@@ -1112,15 +1111,6 @@
     </group>
     <group>
         <name>Drivers</name>
-        <group>
-            <name>BSP</name>
-            <group>
-                <name>STM32L562E-DK</name>
-                <file>
-                    <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32L562E-DK\stm32l562e_discovery.c</name>
-                </file>
-            </group>
-        </group>
         <group>
             <name>CMSIS</name>
             <file>

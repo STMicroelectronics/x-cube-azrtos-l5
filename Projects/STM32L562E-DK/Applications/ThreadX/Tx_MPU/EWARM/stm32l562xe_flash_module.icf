@@ -22,8 +22,8 @@ define block HEAP      with alignment = 8, size = __ICFEDIT_size_heap__     { };
 
 initialize by copy { readwrite };
 do not initialize  { section .noinit };
-                        
-define movable block ROPI with alignment = 4, fixed order 
+
+define movable block ROPI with alignment = 4, fixed order
 { 
   ro object txm_module_preamble.o,
   ro, 
@@ -35,6 +35,6 @@ define movable block RWPI with alignment = 8, fixed order, static base
   rw,
   block HEAP
 };
-                        
+
 place in ROM_region   { block ROPI };
 place in RAM_region   { block RWPI };

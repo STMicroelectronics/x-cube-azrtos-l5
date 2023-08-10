@@ -357,7 +357,6 @@
           <state>$PROJ_DIR$/../Secure_nsclib</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/common/inc/</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/ports/cortex_m33/iar/inc/</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include</state>
           <state>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy</state>
@@ -1074,24 +1073,9 @@
     </settings>
   </configuration>
   <group>
-    <name></name>
-    <excluded>
-      <configuration></configuration>
-    </excluded>
-    <file>
-      <name></name>
-      <excluded>
-        <configuration></configuration>
-      </excluded>
-    </file>
-  </group>
-  <group>
     <name>Application</name>
     <group>
       <name>EWARM</name>
-      <excluded>
-        <configuration></configuration>
-      </excluded>
       <file>
         <name>$PROJ_DIR$/startup_stm32l562xx.s</name>
       </file>
@@ -1123,15 +1107,6 @@
   </group>
   <group>
     <name>Drivers</name>
-    <group>
-      <name>BSP</name>
-      <group>
-        <name>STM32L562E-DK</name>
-        <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</name>
-        </file>
-      </group>
-    </group>
     <group>
       <name>STM32L5xx_HAL_Driver</name>
       <file>

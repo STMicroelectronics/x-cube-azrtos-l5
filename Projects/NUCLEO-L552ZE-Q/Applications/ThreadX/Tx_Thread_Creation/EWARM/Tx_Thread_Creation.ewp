@@ -360,7 +360,6 @@
           <state>$PROJ_DIR$/../../../../../../Drivers/CMSIS/Include</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/common/inc/</state>
           <state>$PROJ_DIR$/../../../../../../Middlewares/ST/threadx/ports/cortex_m33/iar/inc/</state>
-          <state>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L5xx_Nucleo</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1114,15 +1113,6 @@
   <group>
     <name>Drivers</name>
     <group>
-      <name>BSP</name>
-      <group>
-        <name>STM32L5xx_Nucleo</name>
-        <file>
-          <name>$PROJ_DIR$/../../../../../../Drivers/BSP/STM32L5xx_Nucleo/stm32l5xx_nucleo.c</name>
-        </file>
-      </group>
-    </group>
-    <group>
       <name>STM32L5xx_HAL_Driver</name>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_icache.c</name>
@@ -1171,6 +1161,12 @@
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_cortex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_uart_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../../../../../../Drivers/STM32L5xx_HAL_Driver/Src/stm32l5xx_hal_tim.c</name>

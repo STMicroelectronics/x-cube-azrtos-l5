@@ -18,7 +18,7 @@
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32L5xx_DFP.1.4.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000-0x2003FFFF) IROM(0x8000000-0x807FFFF) CLOCK(8000000) FPU3(SFPU) CPUTYPE("Cortex-M33") ELITTLE TZ DSP</Cpu>
+          <Cpu>IRAM(0x30000000-0x30027FFF) IROM(0x0C000000-0xC03DFFF) IROM2(0x0C03E000-0xC03FFFF) CLOCK(8000000) FPU3(SFPU) CPUTYPE("Cortex-M33") ELITTLE TZ DSP</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -188,9 +188,9 @@
             <RvdsCdeCp>0</RvdsCdeCp>
             <nBranchProt>0</nBranchProt>
             <hadIRAM2>0</hadIRAM2>
-            <hadIROM2>0</hadIROM2>
+            <hadIROM2>1</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>1</nSecure>
@@ -246,13 +246,13 @@
               </Ocm6>
               <IRAM>
                 <Type>0</Type>
-                <StartAddress>0x20000000</StartAddress>
-                <Size>0x40000</Size>
+                <StartAddress>0x30000000</StartAddress>
+                <Size>0x28000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <StartAddress>0xc000000</StartAddress>
+                <Size>0x3e000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -276,13 +276,13 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <StartAddress>0xc000000</StartAddress>
+                <Size>0x3e000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0xc03e000</StartAddress>
+                <Size>0x2000</Size>
               </OCR_RVCT5>
               <OCR_RVCT6>
                 <Type>0</Type>
@@ -301,8 +301,8 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress>0x20000000</StartAddress>
-                <Size>0x40000</Size>
+                <StartAddress>0x30000000</StartAddress>
+                <Size>0x28000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L562xx,TX_THREAD_SECURE_STACK_MAXIMUM=16384,TX_THREAD_SECURE_STACK_MINIMUM=256</Define>
               <Undefine></Undefine>
-              <IncludePath>../Secure/Inc;../Secure_nsclib;../../../../../../Middlewares/ST/threadx/common/inc/;../../../../../../Middlewares/ST/threadx/ports/cortex_m33/ac6/inc/;../../../../../../Drivers/BSP/STM32L562E-DK;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Secure/Inc;../Secure_nsclib;../../../../../../Middlewares/ST/threadx/common/inc/;../../../../../../Middlewares/ST/threadx/ports/cortex_m33/ac6/inc/;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L5xx/Include;../../../../../../Drivers/STM32L5xx_HAL_Driver/Inc/Legacy;../../../../../../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -423,16 +423,6 @@
               <FileName>README.md</FileName>
               <FileType>5</FileType>
               <FilePath>../README.md</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Drivers/BSP/STM32L562E-DK</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32l562e_discovery.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM32L562E-DK/stm32l562e_discovery.c</FilePath>
             </File>
           </Files>
         </Group>

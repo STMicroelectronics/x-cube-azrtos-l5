@@ -23,7 +23,7 @@
 
 //#define USE_DYNAMIC_MEMORY_ALLOCATION
 
-#if defined (__clang__)
+#if defined(__clang__)
 /**************************************************************************/
 /*                                                                        */
 /*       Copyright (c) Microsoft Corporation. All rights reserved.        */
@@ -173,12 +173,12 @@ __tx_IntHandler:
 // VOID InterruptHandler (VOID)
 // {
     PUSH    {r0,lr}     // Save LR (and dummy r0 to maintain stack alignment)
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_enter             // Call the ISR enter function
 #endif
     /* Do interrupt handler work here */
     /* .... */
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_exit              // Call the ISR exit function
 #endif
     POP     {r0,lr}
@@ -196,11 +196,11 @@ SysTick_Handler:
 // VOID TimerInterruptHandler (VOID)
 // {
     PUSH    {r0,lr}     // Save LR (and dummy r0 to maintain stack alignment)
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_enter             // Call the ISR enter function
 #endif
     BL      _tx_timer_interrupt
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_exit              // Call the ISR exit function
 #endif
     POP     {r0,lr}
@@ -230,7 +230,7 @@ __tx_DBGHandler:
     .end
 #endif
 
-#if defined(__IAR_SYSTEMS_ASM__)
+#ifdef __IAR_SYSTEMS_ASM__
 ;/**************************************************************************/
 ;/*                                                                        */
 ;/*       Copyright (c) Microsoft Corporation. All rights reserved.        */
@@ -257,9 +257,9 @@ __tx_DBGHandler:
     EXTERN  _tx_thread_system_stack_ptr
     EXTERN  _tx_initialize_unused_memory
     EXTERN  _tx_timer_interrupt
+    EXTERN  __vector_table
     EXTERN  _tx_execution_isr_enter
     EXTERN  _tx_execution_isr_exit
-    EXTERN  __vector_table
 ;
 ;
 SYSTEM_CLOCK      EQU   110000000
@@ -391,38 +391,39 @@ __tx_BadHandler:
 
     PUBLIC  __tx_IntHandler
 __tx_IntHandler:
-// VOID InterruptHandler (VOID)
-// {
-    PUSH    {r0,lr}     // Save LR (and dummy r0 to maintain stack alignment)
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+; VOID InterruptHandler (VOID)
+; {
+    PUSH    {r0,lr}     ; Save LR (and dummy r0 to maintain stack alignment)
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_enter             // Call the ISR enter function
 #endif
-    /* Do interrupt handler work here */
-    /* .... */
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+;    /* Do interrupt handler work here */
+;    /* .... */
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_exit              // Call the ISR exit function
 #endif
     POP     {r0,lr}
     BX      lr
-// }
+; }
 
     PUBLIC  __tx_SysTickHandler
     PUBLIC SysTick_Handler
 SysTick_Handler:
 __tx_SysTickHandler:
-// VOID TimerInterruptHandler (VOID)
-// {
-    PUSH    {r0,lr}     // Save LR (and dummy r0 to maintain stack alignment)
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+; VOID TimerInterruptHandler (VOID)
+; {
+;
+    PUSH    {r0,lr}     ; Save LR (and dummy r0 to maintain stack alignment)
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_enter             // Call the ISR enter function
 #endif
     BL      _tx_timer_interrupt
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_exit              // Call the ISR exit function
 #endif
     POP     {r0,lr}
     BX      lr
-// }
+; }
 
     PUBLIC  __tx_NMIHandler
 __tx_NMIHandler:
@@ -435,7 +436,7 @@ __tx_DBGHandler:
     END
 #endif
 
-#if (defined(__GNUC__) && !defined(__clang__))
+#if defined (__GNUC__) && !defined(__clang__)
 /**************************************************************************/
 /*                                                                        */
 /*       Copyright (c) Microsoft Corporation. All rights reserved.        */
@@ -584,12 +585,12 @@ __tx_IntHandler:
 // VOID InterruptHandler (VOID)
 // {
     PUSH    {r0,lr}     // Save LR (and dummy r0 to maintain stack alignment)
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_enter             // Call the ISR enter function
 #endif
     /* Do interrupt handler work here */
     /* .... */
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_exit              // Call the ISR exit function
 #endif
     POP     {r0,lr}
@@ -607,11 +608,11 @@ SysTick_Handler:
 // VOID TimerInterruptHandler (VOID)
 // {
     PUSH    {r0,lr}     // Save LR (and dummy r0 to maintain stack alignment)
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_enter             // Call the ISR enter function
 #endif
     BL      _tx_timer_interrupt
-#if (defined(TX_ENABLE_EXECUTION_CHANGE_NOTIFY) || defined(TX_EXECUTION_PROFILE_ENABLE))
+#ifdef TX_EXECUTION_PROFILE_ENABLE
     BL      _tx_execution_isr_exit              // Call the ISR exit function
 #endif
     POP     {r0,lr}

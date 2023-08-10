@@ -35,8 +35,8 @@
 #if defined ( __GNUC__) && !defined(__clang__)
  #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
- #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -56,7 +56,7 @@ UART_HandleTypeDef huart1;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void GPIO_Init(void);
-static void MX_USART1_UART_Init(void);
+static void UART_Config(void);
 void Error_Handler(void);
 
 /* USER CODE BEGIN PFP */
@@ -76,6 +76,8 @@ int main(void)
 
   /* USER CODE END 1 */
 
+  /* MCU Configuration--------------------------------------------------------*/
+
   /* STM32L5xx HAL library initialization */
   HAL_Init();
 
@@ -87,20 +89,21 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  BSP_LED_Init(LED_GREEN);
-  BSP_LED_Init(LED_RED);
-  /* USER CODE END SysInit */
+
+  /* Configure GPIO */
+  GPIO_Init();
 
   /* Configure USART */
-  GPIO_Init();
-  MX_USART1_UART_Init();
+  UART_Config();
+
+  /* USER CODE END SysInit */
 
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Call ThreadX entry function */
-  MX_ThreadX_Init();
+  MX_AZURE_RTOS_Init();
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -112,7 +115,6 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
-
 
 /**
   * @brief System Clock Configuration
@@ -163,27 +165,27 @@ void SystemClock_Config(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  printf(" Error \n");
-  BSP_LED_Off(LED_GREEN);
+  printf(" Error occurred\n");
+  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_SET);
   while(1)
   {
     /* Toggle LED_RED: Error */
-    BSP_LED_Toggle(LED_RED);
-    HAL_Delay(100);
+    HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+    HAL_Delay(400);
   }
   /* USER CODE END Error_Handler_Debug */
 }
 
 /* USER CODE BEGIN 4 */
 /**
-* @brief  Retargets the C library printf function to the USART.
-* @param  None
-* @retval None
-*/
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
 PUTCHAR_PROTOTYPE
 {
   /* Place your implementation of fputc here */
-  /* e.g. write a character to the USART1 and Loop until the end of transmission */
+  /* e.g. write a character to the USART and Loop until the end of transmission */
   HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
 
   return ch;
@@ -195,7 +197,7 @@ PUTCHAR_PROTOTYPE
   * @param None
   * @retval None
   */
-static void MX_USART1_UART_Init(void)
+static void UART_Config(void)
 {
 
   /* USER CODE BEGIN USART1_Init 0 */
@@ -246,28 +248,37 @@ static void MX_USART1_UART_Init(void)
 static void GPIO_Init(void)
 {
 
-  GPIO_InitTypeDef  GPIO_InitStruct;
+GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
+  HAL_PWREx_EnableVddIO2();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  
-/* Configure the GREEN_LED pin */
-  GPIO_InitStruct.Pin = GPIO_PIN_7;
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin : PG12 */
+  GPIO_InitStruct.Pin = LED_GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(LED_GREEN_GPIO_Port, &GPIO_InitStruct);
 
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_RESET);
+  /*Configure GPIO pin : PD3 */
+  GPIO_InitStruct.Pin = LED_RED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(LED_RED_GPIO_Port, &GPIO_InitStruct);
 
-  /* Configure the RED_LED pin */
-  GPIO_InitStruct.Pin = GPIO_PIN_14;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 }
 
  /**

@@ -51,6 +51,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 static void NonSecure_Init(void);
+static void MX_GPIO_Init(void);
 static void MX_GTZC_S_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -90,6 +91,7 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
   /* All IOs are by default allocated to secure */
@@ -112,9 +114,6 @@ int main(void)
   HAL_GPIO_ConfigPinAttributes(GPIOH, GPIO_PIN_All, GPIO_PIN_NSEC);
 
   /* Leave the GPIO clocks enabled to let non-secure having I/Os control */
-
-  /* Initialize PG.12 to drive external LED (LED_GREEN) */
-  BSP_LED_Init(LED_GREEN);
 
   /* Secure SysTick should rather be suspended before calling non-secure  */
   /* in order to avoid wake-up from sleep mode entered by non-secure      */
@@ -225,6 +224,39 @@ static void MX_GTZC_S_Init(void)
 
   /* USER CODE END GTZC_S_Init 2 */
 
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  HAL_PWREx_EnableVddIO2();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin : LED_GREEN_Pin */
+  GPIO_InitStruct.Pin = LED_GREEN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(LED_GREEN_GPIO_Port, &GPIO_InitStruct);
+
+  /*IO attributes management functions */
+  HAL_GPIO_ConfigPinAttributes(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_NSEC);
+
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */

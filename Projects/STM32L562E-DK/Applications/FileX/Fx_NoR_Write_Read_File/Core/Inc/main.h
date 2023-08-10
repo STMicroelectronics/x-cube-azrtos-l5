@@ -51,13 +51,16 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void   MX_OCTOSPI1_Init(void);
 
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LED1_Pin GPIO_PIN_12
+#define LED1_GPIO_Port GPIOG
+#define LED2_Pin GPIO_PIN_3
+#define LED2_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

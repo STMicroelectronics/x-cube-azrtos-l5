@@ -32,7 +32,7 @@ PROCESSING_FINISHED       = 44
 } ProgressState;
 
 /* Private define ------------------------------------------------------------*/
-#define DEFAULT_STACK_SIZE         1024*3
+#define DEFAULT_STACK_SIZE         1024
 #define MODULE_DATA_SIZE           32*1024
 #define OBJECT_MEM_SIZE            16*1024
 
@@ -42,12 +42,14 @@ PROCESSING_FINISHED       = 44
 
 #define MODULE_FLASH_ADDRESS       0x08020000
 
+
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
+
 /* Define the ThreadX object control blocks */
 TX_THREAD               ModuleManager;
-TXM_MODULE_INSTANCE     ModuleOne;
+TXM_MODULE_INSTANCE     my_module;
 TX_QUEUE                ResidentQueue;
 
 /* Define the module data pool area. */
@@ -57,7 +59,7 @@ UCHAR  module_data_area[MODULE_DATA_SIZE];
 UCHAR  object_memory[OBJECT_MEM_SIZE];
 
 /* Define the count of memory faults.  */
-ULONG memory_faults = 0;
+ULONG                   memory_faults = 0;
 
 static UCHAR tx_byte_pool_buffer[TX_APP_MEM_POOL_SIZE];
 static TX_BYTE_POOL ModuleManagerBytePool;
@@ -65,7 +67,7 @@ static TX_BYTE_POOL ModuleManagerBytePool;
 /* Private function prototypes -----------------------------------------------*/
 void Error_Handler(void);
 VOID pretty_msg(char *p_msg, ULONG r_msg);
-VOID ModuleManager_Entry(ULONG thread_input);
+VOID module_manager_entry(ULONG thread_input);
 VOID module_fault_handler(TX_THREAD *thread, TXM_MODULE_INSTANCE *module);
 
 /**
@@ -85,14 +87,16 @@ VOID tx_application_define(VOID *first_unused_memory)
   }
   else
   {
+
     /* Allocate the stack for Module Manager Thread.  */
     if (tx_byte_allocate(&ModuleManagerBytePool, (VOID **) &pointer,
                          DEFAULT_STACK_SIZE, TX_NO_WAIT) != TX_SUCCESS)
     {
       Error_Handler();
     }
+
     /* Create Module Manager Thread.  */
-    if (tx_thread_create(&ModuleManager, "Module Manager Thread", ModuleManager_Entry, 0,
+    if (tx_thread_create(&ModuleManager, "Module Manager Thread", module_manager_entry, 0,
                          pointer, DEFAULT_STACK_SIZE,
                          MODULE_MANAGER_THREAD_PRIO, MODULE_MANAGER_THREAD_PREEMPTION_THRESHOLD,
                          TX_NO_TIME_SLICE, TX_AUTO_START) != TX_SUCCESS)
@@ -100,15 +104,15 @@ VOID tx_application_define(VOID *first_unused_memory)
       Error_Handler();
     }
 
-    /* Allocate the stack for ResidentQueue.  */
+    /* Allocate the stack for resident_queue.  */
     if (tx_byte_allocate(&ModuleManagerBytePool, (VOID **) &pointer,
                          16 * sizeof(ULONG), TX_NO_WAIT) != TX_SUCCESS)
     {
       Error_Handler();
     }
 
-    /* Create the ResidentQueue */
-    if (tx_queue_create(&ResidentQueue, "Resident Queue",TX_1_ULONG,
+    /* Create the resident_queue */
+    if (tx_queue_create(&ResidentQueue, "Resident Queue", TX_1_ULONG,
                         pointer, 16 * sizeof(ULONG)) != TX_SUCCESS)
     {
       Error_Handler();
@@ -116,12 +120,12 @@ VOID tx_application_define(VOID *first_unused_memory)
   }
 }
 
-/**
-   * @brief  MX_ThreadX_Init
+ /**
+   * @brief  MX_AZURE_RTOS_Init
    * @param  None
    * @retval None
    */
-void MX_ThreadX_Init(void)
+void MX_AZURE_RTOS_Init(void)
 {
   /* USER CODE BEGIN  Before_Kernel_Start */
 
@@ -139,7 +143,7 @@ void MX_ThreadX_Init(void)
   * @param  thread_input: thread id
   * @retval none
   */
-VOID ModuleManager_Entry(ULONG thread_input)
+VOID module_manager_entry(ULONG thread_input)
 {
   UINT   status;
   CHAR   p_msg[64];
@@ -171,7 +175,7 @@ VOID ModuleManager_Entry(ULONG thread_input)
   }
 
   /* Load the module from the specified address */
-  status = txm_module_manager_in_place_load(&ModuleOne, "Module One", (VOID *) MODULE_FLASH_ADDRESS);
+  status = txm_module_manager_in_place_load(&my_module, "my module", (VOID *) MODULE_FLASH_ADDRESS);
 
   if(status != TX_SUCCESS)
   {
@@ -179,7 +183,7 @@ VOID ModuleManager_Entry(ULONG thread_input)
   }
 
   /* Enable shared memory region for module with read-only access permission. */
-  status = txm_module_manager_external_memory_enable(&ModuleOne, (void*)READONLY_REGION, SHARED_MEM_SIZE, TXM_MODULE_ATTRIBUTE_READ_ONLY);
+  status = txm_module_manager_external_memory_enable(&my_module, (void*)READONLY_REGION, SHARED_MEM_SIZE, 0);
 
   if(status != TX_SUCCESS)
   {
@@ -187,7 +191,7 @@ VOID ModuleManager_Entry(ULONG thread_input)
   }
 
   /* Enable shared memory region for module with read and write access permission. */
-  status = txm_module_manager_external_memory_enable(&ModuleOne, (void*)READWRITE_REGION, SHARED_MEM_SIZE, TXM_MODULE_ATTRIBUTE_READ_WRITE);
+  status = txm_module_manager_external_memory_enable(&my_module, (void*)READWRITE_REGION, SHARED_MEM_SIZE, TXM_MODULE_ATTRIBUTE_READ_WRITE);
 
   if(status != TX_SUCCESS)
   {
@@ -195,7 +199,7 @@ VOID ModuleManager_Entry(ULONG thread_input)
   }
 
   /* Get module properties. */
-  status = txm_module_manager_properties_get(&ModuleOne, &module_properties);
+  status = txm_module_manager_properties_get(&my_module, &module_properties);
 
   if(status != TX_SUCCESS)
   {
@@ -203,15 +207,16 @@ VOID ModuleManager_Entry(ULONG thread_input)
   }
 
   /* Print loaded module info */
-  printf("Module <%s> is loaded from address 0x%08X\n", ModuleOne.txm_module_instance_name, MODULE_FLASH_ADDRESS);
-  printf("Module code section size: %i bytes, data section size: %i\n", (int)ModuleOne.txm_module_instance_code_size, (int)ModuleOne.txm_module_instance_data_size);
+  printf("Module <%s> is loaded from address 0x%08X\n", my_module.txm_module_instance_name, MODULE_FLASH_ADDRESS);
+  printf("Module code section size: %i bytes, data section size: %i\n", (int)my_module.txm_module_instance_code_size, (int)my_module.txm_module_instance_data_size);
   printf("Module Attributes:\n");
-  printf("  - Compiled for %s compiler\n", ((module_properties >> 25) == 1)? "STM32CubeIDE (GNU)" : ((module_properties >> 24) == 1)? "ARM KEIL" : "IAR EW");
+  printf("  - Compiled for %s compiler\n", ((module_properties >> 25) == 1)? "CubeIDE (GNU)" : ((module_properties >> 24) == 1)? "ARM KEIL" : "IAR EW");
   printf("  - Shared/external memory access is %s\n", ((module_properties & 0x04) == 0)? "Disabled" : "Enabled");
   printf("  - MPU protection is %s\n", ((module_properties & 0x02) == 0)? "Disabled" : "Enabled");
   printf("  - %s mode execution is enabled for the module\n\n", ((module_properties & 0x01) == 0)? "Privileged" : "User");
+
   /* Start the modules. */
-  status = txm_module_manager_start(&ModuleOne);
+  status = txm_module_manager_start(&my_module);
 
   if(status != TX_SUCCESS)
   {
@@ -223,7 +228,7 @@ VOID ModuleManager_Entry(ULONG thread_input)
   /* Get Module's progress messages */
   while(r_msg != PROCESSING_FINISHED)
   {
-    if(tx_queue_receive(&ResidentQueue, &r_msg, 10) == TX_SUCCESS)
+    if(tx_queue_receive(&ResidentQueue, &r_msg, TX_TIMER_TICKS_PER_SECOND) == TX_SUCCESS)
     {
       /* Convert the message to a user friendly string */
       pretty_msg(p_msg, r_msg);
@@ -241,7 +246,7 @@ VOID ModuleManager_Entry(ULONG thread_input)
   }
 
   /* Stop the modules. */
-  status = txm_module_manager_stop(&ModuleOne);
+  status = txm_module_manager_stop(&my_module);
 
   if(status != TX_SUCCESS)
   {
@@ -249,7 +254,7 @@ VOID ModuleManager_Entry(ULONG thread_input)
   }
 
   /* Unload the modules. */
-  status = txm_module_manager_unload(&ModuleOne);
+  status = txm_module_manager_unload(&my_module);
 
   if(status != TX_SUCCESS)
   {
@@ -258,9 +263,8 @@ VOID ModuleManager_Entry(ULONG thread_input)
 
   /* Toggle green LED to indicated success of operations */
   while(1) {
-    /* Toggle GREEN LED*/
-    BSP_LED_Toggle(LED_GREEN);
-    HAL_Delay(100);
+    HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+    tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND / 2);
   }
 }
 

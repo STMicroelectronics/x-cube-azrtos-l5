@@ -27,11 +27,11 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32l5xx_hal.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "txm_module.h"
 #include "main.h"
+#include "txm_module.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -51,7 +51,7 @@
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
-void MX_ThreadX_Init(void);
+void MX_AZURE_RTOS_Init(void);
 
 /* USER CODE BEGIN EFP */
 
